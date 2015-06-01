@@ -116,6 +116,7 @@ User.all.each do |user|
       teacher.name = Faker::Name.name
       teacher.address = Faker::Address.street_address
       teacher.phone_number = Faker::PhoneNumber.cell_phone
+      teacher.avatar = Faker::Avatar.image
       teacher.school_id = school.id
       teacher.save
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150601193034) do
+ActiveRecord::Schema.define(version: 20150601195429) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "meeting_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150601193034) do
     t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar"
   end
 
   create_table "themes", force: :cascade do |t|
