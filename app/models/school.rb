@@ -1,4 +1,4 @@
 class School < ActiveRecord::Base
-  has_many :teachers
+  has_one :teacher
   belongs_to :network
 end

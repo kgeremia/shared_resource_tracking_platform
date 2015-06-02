@@ -7,23 +7,24 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 theme_hashes = [
-{ :name => "Friends, Family and Greetings" },
-{ :name => "Colors and Geometric Shapes" },
-{ :name => "Body Parts and Numbers" },
-{ :name => "My House" },
-{ :name => "Weather and Clothes" },
-{ :name => "Occupations " },
-{ :name => "Fruits and Vegetables" },
-{ :name => "The Dentist" },
-{ :name => "The Doctor" },
-{ :name => "Sea Animals" },
-{ :name => "Transportation" },
-{ :name => "Holidays and Celebrations " },
+  { :name => "Friends, Family and Greetings", :avatar => "http://www.cliparthut.com/clip-arts/594/indian-family-594896.jpg" },
+  { :name => "Colors and Geometric Shapes", :avatar => "http://cliparts.co/cliparts/8Tx/nLR/8TxnLRKgc.jpg" },
+  { :name => "Body Parts and Numbers", :avatar => "https://s-media-cache-ak0.pinimg.com/236x/87/36/b6/8736b6a9fa0817c71453563c53f12d11.jpg" },
+  { :name => "My House", :avatar => "http://www.clker.com/cliparts/O/R/K/G/A/s/whitehouse-hi.png" },
+  { :name => "Weather and Clothes", :avatar => "https://mcdn1.teacherspayteachers.com/thumbitem/Cloudweather-clipart-1054576/original-1054576-1.jpg" },
+  { :name => "Occupations ", :avatar => "http://images.clipartpanda.com/student-at-desk-clipart-teacher-clip-art_1404120270.jpg" },
+  { :name => "Fruits and Vegetables", :avatar => "http://images.clipartpanda.com/fruit-bowl-clipart-fruit-clipart.png" },
+  { :name => "The Dentist", :avatar => "http://images.clipartpanda.com/founding-clipart-dentist.png" },
+  { :name => "The Doctor", :avatar => "http://images.clipartpanda.com/doctor-clip-art-doctor-clip-art-5.jpg" },
+  { :name => "Sea Animals", :avatar => "http://cliparts.co/cliparts/bpc/qMj/bpcqMjET9.png" },
+  { :name => "Transportation", :avatar => "http://www.clipartindia.com/cpiadmin/uploads/thumb-autorickshaw-0001.jpg" },
+  { :name => "Holidays and Celebrations ", :avatar => "http://vignette3.wikia.nocookie.net/animaljam/images/9/9a/Kids-celebration-clip-art-RiGB8pLiL.gif/revision/latest?cb=20150418011534" },
 ]
 
 theme_hashes.each do |theme_hash|
   theme = Theme.new
   theme.name = theme_hash[:name]
+  theme.avatar = theme_hash[:avatar]
   theme.save
 end
 
@@ -80,31 +81,39 @@ resource_hashes = [
 { :name => "Books", :theme => "Holidays and Celebrations " },
 ]
 
-resource_hashes.each do |resource_hash|
-  theme = Theme.find_by({ :name => resource_hash[:theme] })
-  resource = Resource.new
-  resource.name = resource_hash[:name]
-  resource.theme_id = theme.id
-  resource.save
-end
-
-puts "There are now #{Resource.count} resources in the database."
-
+user = User.new
+user.name = "Kate"
+user.email = "kate@example.com"
+user.password = "12341234"
+user.password_confirmation = "12341234"
+user.save
 
 3.times do
   user = User.new
   user.name = Faker::Name.name
   user.email = Faker::Internet.email(user.name)
   user.password = "12341234"
+  user.password_confirmation = "12341234"
   user.save
 end
 
 User.all.each do |user|
-  rand(1..3).times do
+  rand(2..3).times do
     network = Network.new
     network.name = Faker::Address.city
     network.user_id = user.id
     network.save
+
+    resource_hashes.each do |resource_hash|
+      theme = Theme.find_by({ :name => resource_hash[:theme] })
+      resource = Resource.new
+      resource.name = resource_hash[:name]
+      resource.theme_id = theme.id
+      resource.network_id = network.id
+      resource.save
+    end
+
+    puts "There are now #{Resource.count} resources in the database."
 
     12.times do
       school = School.new
@@ -118,7 +127,15 @@ User.all.each do |user|
       teacher.phone_number = Faker::PhoneNumber.cell_phone
       teacher.avatar = Faker::Avatar.image
       teacher.school_id = school.id
+      teacher.network_id = network.id
+      puts "1) Teacher " + teacher.name.to_s + " has network_id " + teacher.network_id.to_s
       teacher.save
+      puts "           SAVE SUCCESSFUL"
+      puts "2) Teacher " + teacher.name.to_s + " has network_id " + teacher.network_id.to_s
+    end
+
+    Teacher.all.each do |teacher|
+      puts "3) Teacher " + teacher.name.to_s + " has network_id " + teacher.network_id.to_s
     end
 
     rand(6..10).times do |num|

@@ -1,6 +1,10 @@
 class TeachersController < ApplicationController
   def index
-    @teachers = Teacher.all
+    @teachers = current_user.teachers
+
+    #@teachers = Teacher.where({ :user_id => current_user.id })
+    #if teacher.network.user.id == current_user.id
+
   end
 
   def show

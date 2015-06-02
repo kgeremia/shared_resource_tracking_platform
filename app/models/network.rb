@@ -1,8 +1,10 @@
 class Network < ActiveRecord::Base
 
 has_many :resources
-has_one :school
-has_many :teachers, :through => :school
+has_many :schools
+#has_many :teachers, :through => :school
+has_many :teachers
 has_many :meetings
+belongs_to :user
 
 end

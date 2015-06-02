@@ -1,10 +1,12 @@
 class NetworksController < ApplicationController
   def index
-    @networks = Network.all
+    #@networks = Network.where({ :user_id => current_user.id })
+    @networks = current_user.networks
   end
 
   def show
     @network = Network.find(params[:id])
+
   end
 
   def new
