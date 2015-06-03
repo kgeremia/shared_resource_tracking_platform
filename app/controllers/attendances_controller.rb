@@ -9,9 +9,16 @@ class AttendancesController < ApplicationController
 
   def new
     @attendance = Attendance.new
+    @teachers = current_user.teachers
+    @options = ["Present", "Absent", "Excused"]
+
   end
 
   def create
+
+    @teachers = current_user.teachers
+    @options = ["Present", "Absent", "Excused"]
+
     @attendance = Attendance.new
     @attendance.meeting_id = params[:meeting_id]
     @attendance.teacher_id = params[:teacher_id]

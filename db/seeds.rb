@@ -110,6 +110,10 @@ User.all.each do |user|
       resource.name = resource_hash[:name]
       resource.theme_id = theme.id
       resource.network_id = network.id
+      resource.status = "Returned"
+        if rand < 0.2
+          resource.status = ["Damaged", "Missing"].sample
+        end
       resource.save
     end
 
@@ -130,13 +134,10 @@ User.all.each do |user|
       teacher.network_id = network.id
       puts "1) Teacher " + teacher.name.to_s + " has network_id " + teacher.network_id.to_s
       teacher.save
-      puts "           SAVE SUCCESSFUL"
-      puts "2) Teacher " + teacher.name.to_s + " has network_id " + teacher.network_id.to_s
+
     end
 
-    Teacher.all.each do |teacher|
-      puts "3) Teacher " + teacher.name.to_s + " has network_id " + teacher.network_id.to_s
-    end
+
 
     rand(6..10).times do |num|
       meeting = Meeting.new

@@ -28,8 +28,7 @@
               Network
             </label>
             <div class="col-sm-10">
-              <%= select_tag :network_id, options_from_collection_for_select(@networks.order("name ASC"), :id, :name, @meeting.network_id), :class => "form-control" %>
-
+              <input type="text" id="network_id" name="network_id" placeholder="Network" class="form-control" value="<%= @meeting.network_id %>">
             </div>
           </div>
 
@@ -53,16 +52,8 @@
             </div>
           </div>
         </form>
-
       </div>
-
     </div>
-FIX THIS
-   <% @teachers.each do |teacher| %>
-   <ul><li>teacher</li></ul>
-   <% end %>
-
-
   </div>
 </div>
 

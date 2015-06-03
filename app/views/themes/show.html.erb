@@ -13,7 +13,13 @@
               <dt>Name</dt>
               <dd><%= @theme.name %></dd>
 
+              <dt></dt>
+              <dd><img src="<%= @theme.avatar %>" height="100"></dd>
+
             </dl>
+            <% @theme.resources.each do |resource| %>
+            <dd><%= resource.name %></dd>
+            <% end %>
             <div class="btn-group btn-group-justified">
               <a href="/themes" class="btn btn-primary">
                 <i class="fa fa-chevron-left"></i>

@@ -11,19 +11,25 @@
           <div class="col-md-12">
             <dl class="dl-horizontal">
               <dt>Network</dt>
-              <dd><%= @teacher.network_id %></dd>
+              <dd><%= @teacher.network.name %></dd>
+
+              <dt>Picture</dt>
+              <dd><img src="<%= @teacher.avatar %>"></dd>
 
               <dt>Name</dt>
               <dd><%= @teacher.name %></dd>
 
               <dt>School</dt>
-              <dd><%= @teacher.school_id %></dd>
+              <dd><%= @teacher.school.name %></dd>
 
               <dt>Address</dt>
               <dd><%= @teacher.address %></dd>
 
               <dt>Phone number</dt>
               <dd><%= @teacher.phone_number %></dd>
+
+              <dt>Attendance History</dt>
+              <dd><%= @attendance %>%</dd>
 
             </dl>
             <div class="btn-group btn-group-justified">

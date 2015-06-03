@@ -10,9 +10,17 @@ class MeetingsController < ApplicationController
 
   def new
     @meeting = Meeting.new
+    @networks = current_user.networks
+    @teachers = Teacher.where({ :network_id => params[:network_id]})
+
+
   end
 
   def create
+    @networks = current_user.networks
+    @teachers = Teacher.where({ :network_id => params[:network_id]})
+    #Network.where({ :user_id => current_user.id })
+
     @meeting = Meeting.new
     @meeting.network_id = params[:network_id]
     @meeting.met_on = params[:met_on]
