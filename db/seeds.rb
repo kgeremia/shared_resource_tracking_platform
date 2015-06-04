@@ -152,6 +152,7 @@ User.all.each do |user|
         attendance.note = Faker::Lorem.paragraph
         attendance.theme_id = Theme.offset(rand(Theme.count)).first.id
         attendance.attendance = "Present"
+        attendance.network_id = teacher.network_id
         if rand < 0.1
           attendance.attendance = ["Absent", "Excused"].sample
         end

@@ -64,7 +64,20 @@ class AttendancesController < ApplicationController
   end
 
   def edit_all
+    @network = Network.find_by({ :id => params[:network_id]})
     @network_id = params[:network_id]
+    @meeting_id = params[:meeting_id]
+
+    @attendances = Attendance.where( :meeting_id => params[:meeting_id], :network_id => params[:network_id])
+
+    #@attendance = Attendance.find(params[:id])
+
+    #@attendance.meeting_id = params[:meeting_id]
+    #@attendance.teacher_id = params[:teacher_id]
+    #@attendance.attendance = params[:attendance]
+    #@attendance.note = params[:note]
+    #@attendance.theme_id = params[:theme_id]
+
   end
 
 end

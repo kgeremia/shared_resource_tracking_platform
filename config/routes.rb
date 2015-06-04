@@ -85,8 +85,8 @@ Rails.application.routes.draw do
 
   # UPDATE
 
-  get "/attendances/:network_id/edit_all", :controller => "attendances", :action => "edit_all"
-  post "/update_attendance/:network_id/edit_all", :controller => "attendances", :action => "edit_all"
+  get "/attendances/:network_id/:meeting_id/edit_all", :controller => "attendances", :action => "edit_all"
+  post "/update_attendance/:network_id/:meeting_id/edit_all", :controller => "attendances", :action => "edit_all"
 
   get "/attendances/:id/edit", :controller => "attendances", :action => "edit"
   post "/update_attendance/:id", :controller => "attendances", :action => "update"

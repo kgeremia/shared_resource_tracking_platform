@@ -12,7 +12,6 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new
     @networks = current_user.networks
     @teachers = Teacher.where({ :network_id => params[:network_id]})
-    @met_on = Time.now
 
   end
 
@@ -25,28 +24,32 @@ class MeetingsController < ApplicationController
     @meeting.network_id = params[:network_id]
     @meeting.met_on = params[:met_on]
 
-    @meeting.save
-
-      @teachers.each do |teacher|
-        a=Attendance.new
-        a.meeting_id = @meeting.id
-        a.teacher_id = teacher.id
-        a.attendance = "Present"
-        a.note = "testing"
-        a.theme_id = ""
-
-        a.save
-      end
-
-    if @meeting.save
-
-      #redirect_to "/attendances/edit_all", :notice => "Meeting created successfully. Now please record attendance."
-
-      redirect_to "/attendances/<%= @meeting.network_id %>/edit", :notice => "Meeting created successfully. Now please record attendance."
+    if @meeting.met_on == nil
+      redirect_to "/meetings/new", :notice => "Please enter the date of the meeting before continuting."
 
     else
-      render 'new'
+
+      if @meeting.save
+
+        @teachers.each do |teacher|
+          a=Attendance.new
+          a.meeting_id = @meeting.id
+          a.teacher_id = teacher.id
+          a.attendance = "Present"
+          a.note = "test 2"
+          a.theme_id = ""
+
+          a.save
+        end
+
+        redirect_to "/attendances/#{@meeting.network_id}/#{@meeting.id}/edit_all", :notice => "Meeting created successfully. Now please record attendance."
+
+      else
+        render 'new'
+      end
+
     end
+
   end
 
   def edit
@@ -65,6 +68,7 @@ class MeetingsController < ApplicationController
       render 'edit'
     end
   end
+
 
   def destroy
     @meeting = Meeting.find(params[:id])
