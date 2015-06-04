@@ -62,4 +62,9 @@ class AttendancesController < ApplicationController
 
     redirect_to "/attendances", :notice => "Attendance deleted."
   end
+
+  def edit_all
+    @network_id = params[:network_id]
+  end
+
 end

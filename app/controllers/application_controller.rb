@@ -13,14 +13,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << :name
 
     devise_parameter_sanitizer.for(:account_update) << :name
-
-
-
-    if @attendance.save
-      redirect_to "/attendances", :notice => "Attendance created successfully."
-    else
-      render 'new'
-    end
-  end
+end
 
 end

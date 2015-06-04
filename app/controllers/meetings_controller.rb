@@ -23,25 +23,26 @@ class MeetingsController < ApplicationController
 
     @meeting = Meeting.new
     @meeting.network_id = params[:network_id]
-    #@meeting.met_on = params[:met_on]
     @meeting.met_on = params[:met_on]
 
-    if @meeting.save
+    @meeting.save
 
       @teachers.each do |teacher|
         a=Attendance.new
         a.meeting_id = @meeting.id
         a.teacher_id = teacher.id
         a.attendance = "Present"
-        a.note = ""
+        a.note = "testing"
         a.theme_id = ""
 
         a.save
-
       end
 
-      redirect_to "/attendances/edit_all", :notice => "Meeting created successfully. Now please record attendance."
-#redirect_to "/attendances/<%= @meeting.network_id %>/edit", :notice => "Meeting created successfully. Now please record attendance." CHANGE ROUTE (i think)
+    if @meeting.save
+
+      #redirect_to "/attendances/edit_all", :notice => "Meeting created successfully. Now please record attendance."
+
+      redirect_to "/attendances/<%= @meeting.network_id %>/edit", :notice => "Meeting created successfully. Now please record attendance."
 
     else
       render 'new'
