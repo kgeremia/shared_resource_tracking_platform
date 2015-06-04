@@ -7,7 +7,10 @@ class NetworksController < ApplicationController
   def show
     @network = Network.find(params[:id])
 
+
   end
+
+
 
   def new
     @network = Network.new

@@ -39,7 +39,10 @@
               Met on
             </label>
             <div class="col-sm-10">
-              <input type="text" id="met_on" name="met_on" placeholder="Met on" class="form-control" value="<%= @meeting.met_on %>">
+              <!--<input type="text" id="met_on" name="met_on" placeholder="Met on" class="form-control" value="<%= @meeting.met_on %>">-->
+              <!--= select_date :met_on, options_from_collection_for_select(@networks.order("name ASC"), :id, :name, @meeting.network_id), :class => "form-control" %>-->
+              <%#= select_date(@met_on, prompt: true) %>
+              <input type="text" id="met_on" name="met_on" placeholder="Met on" class="form-control" value="<%= @meeting.met_on %>" >
             </div>
           </div>
 
@@ -66,4 +69,10 @@ FIX THIS
   </div>
 </div>
 
+
+<script type="text/javascript">
+  $('#met_on').datepicker({
+    format: "yyyy-mm-dd"
+});
+</script>
 <!-- End responsive panel example -->

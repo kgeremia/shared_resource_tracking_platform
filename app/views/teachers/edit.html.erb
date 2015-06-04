@@ -28,7 +28,7 @@
               Network
             </label>
             <div class="col-sm-10">
-              <input type="text" id="network_id" name="network_id" placeholder="Network" class="form-control" value="<%= @teacher.network_id %>">
+              <input type="text" id="network_id" name="network_id" placeholder="Network" class="form-control" value="<%= @teacher.network.name %>">
             </div>
           </div>
 
@@ -48,7 +48,7 @@
               School
             </label>
             <div class="col-sm-10">
-              <input type="text" id="school_id" name="school_id" placeholder="School" class="form-control" value="<%= @teacher.school_id %>">
+              <input type="text" id="school_id" name="school_id" placeholder="School" class="form-control" value="<%= @teacher.school.name %>">
             </div>
           </div>
 

@@ -22,7 +22,9 @@ class AttendancesController < ApplicationController
     @attendance = Attendance.new
     @attendance.meeting_id = params[:meeting_id]
     @attendance.teacher_id = params[:teacher_id]
+    #@attendance.teacher_id = teacher.id
     @attendance.attendance = params[:attendance]
+
     @attendance.note = params[:note]
     @attendance.theme_id = params[:theme_id]
 

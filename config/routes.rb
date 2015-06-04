@@ -71,8 +71,13 @@ Rails.application.routes.draw do
 
   # Routes for the Attendance resource:
   # CREATE
+
   get "/attendances/new", :controller => "attendances", :action => "new"
   post "/create_attendance", :controller => "attendances", :action => "create"
+
+  #get "/attendances/new", :controller => "application", :action => "new_at"
+  #post "/create_attendance", :controller => "application", :action => "create_at"
+
 
   # READ
   get "/attendances", :controller => "attendances", :action => "index"

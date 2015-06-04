@@ -10,13 +10,29 @@
         <div class="row">
           <div class="col-md-12">
             <dl class="dl-horizontal">
-              <dt>User</dt>
-              <dd><%= @network.user_id %></dd>
+              <dt>sharEd Advocate</dt>
+              <dd><%= @network.user.name %></dd>
 
-              <dt>Name</dt>
+              <dt>Network</dt>
               <dd><%= @network.name %></dd>
 
             </dl>
+
+Teachers attendance in the <%= @network.name %> network:
+
+        <div class="row">
+          <div class="col-md-12">
+            <dl class="dl-horizontal">
+
+
+        <% @network.teachers.each do |teacher| %>
+
+          <dt><%= teacher.name %></dt>
+          <dd>X%</dd>
+
+        <% end %>
+      </div>
+
             <div class="btn-group btn-group-justified">
               <a href="/networks" class="btn btn-primary">
                 <i class="fa fa-chevron-left"></i>

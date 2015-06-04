@@ -6,6 +6,7 @@ gem 'starter_generators', :git => "http://github.com/rbetina/starter_generators.
 
 gem 'faker'
 
+gem 'bootstrap-datepicker-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
