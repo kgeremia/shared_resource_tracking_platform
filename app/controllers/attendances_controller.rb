@@ -40,6 +40,9 @@ class AttendancesController < ApplicationController
   end
 
   def update
+    @meeting_id = params[:meeting_id]
+    @network_id = Meeting.find_by( :id => @meeting_id).network_id
+
     @attendance = Attendance.find(params[:id])
 
     @attendance.meeting_id = params[:meeting_id]
@@ -49,7 +52,8 @@ class AttendancesController < ApplicationController
     @attendance.theme_id = params[:theme_id]
 
     if @attendance.save
-      redirect_to "/attendances", :notice => "Attendance updated successfully."
+      #redirect_to "/attendances", :notice => "Attendance updated successfully."
+      redirect_to "/attendances/#{@network_id}/#{@meeting_id}/edit_all", :notice => "Attendance updated successfully."
     else
       render 'edit'
     end
@@ -68,15 +72,7 @@ class AttendancesController < ApplicationController
     @network_id = params[:network_id]
     @meeting_id = params[:meeting_id]
 
-    @attendances = Attendance.where( :meeting_id => params[:meeting_id], :network_id => params[:network_id])
 
-    #@attendance = Attendance.find(params[:id])
-
-    #@attendance.meeting_id = params[:meeting_id]
-    #@attendance.teacher_id = params[:teacher_id]
-    #@attendance.attendance = params[:attendance]
-    #@attendance.note = params[:note]
-    #@attendance.theme_id = params[:theme_id]
 
   end
 

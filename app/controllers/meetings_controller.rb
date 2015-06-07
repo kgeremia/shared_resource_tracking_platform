@@ -42,6 +42,7 @@ class MeetingsController < ApplicationController
           a.save
         end
 
+
         redirect_to "/attendances/#{@meeting.network_id}/#{@meeting.id}/edit_all", :notice => "Meeting created successfully. Now please record attendance."
 
       else
