@@ -40,20 +40,26 @@ class AttendancesController < ApplicationController
   end
 
   def update
-    @meeting_id = params[:meeting_id]
-    @network_id = Meeting.find_by( :id => @meeting_id).network_id
+    #@meeting_id = params[:meeting_id]
+    #@network_id = Meeting.find_by( :id => @meeting_id).network_id
 
     @attendance = Attendance.find(params[:id])
 
-    @attendance.meeting_id = params[:meeting_id]
-    @attendance.teacher_id = params[:teacher_id]
+    #@attendance.meeting_id = params[:meeting_id]
+    #@attendance.teacher_id = params[:teacher_id]
     @attendance.attendance = params[:attendance]
     @attendance.note = params[:note]
     @attendance.theme_id = params[:theme_id]
 
+    teacher_id = @attendance.teacher_id
+    @teacher_name = Teacher.find_by( :id => teacher_id).name
+
+    @options = ["Present", "Absent", "Excused"]
+
     if @attendance.save
       #redirect_to "/attendances", :notice => "Attendance updated successfully."
-      redirect_to "/attendances/#{@network_id}/#{@meeting_id}/edit_all", :notice => "Attendance updated successfully."
+      #redirect_to "/attendances/#{@network_id}/#{@meeting_id}/edit_all", :notice => "Attendance updated successfully."
+      redirect_to :back, :notice => "Attendance for #{@teacher_name} was updated successfully."
     else
       render 'edit'
     end
@@ -69,8 +75,10 @@ class AttendancesController < ApplicationController
 
   def edit_all
     @network = Network.find_by({ :id => params[:network_id]})
+    @meeting = Meeting.find_by({ :id => params[:meeting_id]})
     @network_id = params[:network_id]
     @meeting_id = params[:meeting_id]
+    @options = ["Present", "Absent", "Excused"]
 
 
 

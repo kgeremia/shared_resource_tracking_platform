@@ -1,13 +1,8 @@
-
-<p>Your network_id is <%= @network_id %></p>
-<p>Your meeting_id is <%= @meeting_id %></p>
-
-<p>Teachers are <%= @network.teachers %></p>
-
+<h2>Please update the attendance status for the teachers in the
+<%= @network.name %> Network for the date of <%= @meeting.met_on %>
+</h2>
 <!-- Validation failure messages - Removed temporarily -->
 
-
-Attendances: @attendances %>
 
 
 <!-- Validation failure messages - DELETED for now-->
@@ -21,7 +16,7 @@ Attendances: @attendances %>
   <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Edit Attendance #<%= teacher.attendances.find_by( :meeting_id => @meeting_id ).id %></h3>
+        <h3 class="panel-title"><%= teacher.name %></h3>
       </div>
       <div class="panel-body">
         <form action="/update_attendance/<%= teacher.attendances.find_by( :meeting_id => @meeting_id ).id %>" method="post" class="form-horizontal">
@@ -29,24 +24,10 @@ Attendances: @attendances %>
           <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
           <!-- Label and input for meeting_id -->
-          <div class="form-group">
-            <label for="meeting_id" class="col-sm-2 control-label">
-              Meeting
-            </label>
-            <div class="col-sm-10">
-              <input type="text" id="meeting_id" name="meeting_id" placeholder="Meeting" class="form-control" value="<%= @meeting_id %>">
-            </div>
-          </div>
+
 
           <!-- Label and input for teacher_id -->
-          <div class="form-group">
-            <label for="teacher_id" class="col-sm-2 control-label">
-              Teacher
-            </label>
-            <div class="col-sm-10">
-              <input type="text" id="teacher_id" name="teacher_id" placeholder="Teacher" class="form-control" value="<%= teacher.id %>">
-            </div>
-          </div>
+
 
           <!-- Label and input for attendance -->
           <div class="form-group">
@@ -54,7 +35,8 @@ Attendances: @attendances %>
               Attendance
             </label>
             <div class="col-sm-10">
-              <input type="text" id="attendance" name="attendance" placeholder="Attendance" class="form-control" value="<%= teacher.attendances.find_by( :meeting_id => @meeting_id ).attendance %>">
+
+              <%= select_tag :attendance, options_for_select(@options, 'attendance'), :class => "form-control" %>
             </div>
           </div>
 
