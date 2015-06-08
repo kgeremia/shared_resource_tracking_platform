@@ -1,5 +1,5 @@
 <h2>Please update the attendance status for the teachers in the
-<%= @network.name %> Network for the date of <%= @meeting.met_on %>
+<%= @network.name %> Network for the meeting on <%= @meeting.met_on %>
 </h2>
 <!-- Validation failure messages - Removed temporarily -->
 
@@ -35,8 +35,7 @@
               Attendance
             </label>
             <div class="col-sm-10">
-
-              <%= select_tag :attendance, options_for_select(@options, 'attendance'), :class => "form-control" %>
+              <%= select_tag :attendance, options_for_select(@options, teacher.attendances.find_by( :meeting_id => @meeting_id ).attendance), :class => "form-control" %>
             </div>
           </div>
 
