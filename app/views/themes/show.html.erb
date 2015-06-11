@@ -17,9 +17,22 @@
               <dd><img src="<%= @theme.avatar %>" height="100"></dd>
 
             </dl>
-            <% @theme.resources.each do |resource| %>
-            <dd><%= resource.name %></dd>
+
+            <table>
+            <caption>Which teachers are currently renting Theme #<%= @theme.id %></caption>
+            <tr>
+            <th width="80%">Teacher</th>
+            <th width="20%">Network</th>
+            </tr>
+            <% @teachers.each do |teacher| %>
+              <tr>
+              <td><%= teacher.name if teacher.attendances.last.theme_id == @theme.id %></td>
+              <td><%= teacher.network.name if teacher.attendances.last.theme_id == @theme.id %></td>
+              </tr>
+
             <% end %>
+             </table>
+
             <div class="btn-group btn-group-justified">
               <a href="/themes" class="btn btn-primary">
                 <i class="fa fa-chevron-left"></i>

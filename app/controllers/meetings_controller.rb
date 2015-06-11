@@ -4,6 +4,7 @@ class MeetingsController < ApplicationController
     @meetings = current_user.meetings
   end
 
+
   def show
     @meeting = Meeting.find(params[:id])
     @network = @meeting.network_id

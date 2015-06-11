@@ -3,8 +3,24 @@ class ThemesController < ApplicationController
     @themes = Theme.all
   end
 
+
   def show
     @theme = Theme.find(params[:id])
+    @teachers = current_user.teachers
+    #Teacher.attendances.last.theme_id => params[:id]
+    #Teacher.where(:id => Network.attendances.met_on.last)
+
+  #   # Create a hash
+  #   @array = Array.new
+  #   @teachers.each do |teacher|
+  #     if teacher.attendances.last.theme_id == @theme.id
+  #       tch_name = teacher.name
+  #       tch_ntw = teacher.network.name
+  #       @array.push tch_name
+  #       @array.push tch_ntw
+  #     end
+  # end
+
   end
 
   def new

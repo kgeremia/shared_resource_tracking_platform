@@ -7,20 +7,28 @@ class TeachersController < ApplicationController
   def show
     @teacher = Teacher.find(params[:id])
 
-    running_total = 0
-        @teacher.attendances.each do |attendance|
-          if attendance.attendance == "Present"
-            temp = 1
-          else
-            temp = 0
-          end
-        running_total=running_total + temp
-      end
-
     count = @teacher.attendances.count.to_f
-    present = running_total.to_f
 
-    @attendance = (present/count*100).round(0)
+    if count == 0
+      @attendance = ""
+    else
+
+      running_total = 0
+          @teacher.attendances.each do |attendance|
+            if attendance.attendance == "Present"
+              temp = 1
+            else
+              temp = 0
+            end
+          running_total=running_total + temp
+        end
+
+      count = @teacher.attendances.count.to_f
+      present = running_total.to_f
+
+      @attendance = (present/count*100).round(0)
+
+    end
 
   end
 
