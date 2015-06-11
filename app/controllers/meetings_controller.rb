@@ -27,7 +27,8 @@ class MeetingsController < ApplicationController
     @meeting.met_on = params[:met_on]
 
     if @meeting.met_on == nil
-      redirect_to "/meetings/new", :notice => "Please enter the date of the meeting before continuting."
+      redirect_to "/meetings/new", :alert => "Please enter the date of the meeting before continuting."
+    elsif @meeting.met_on
 
     else
 
@@ -66,7 +67,8 @@ class MeetingsController < ApplicationController
     @meeting.met_on = params[:met_on]
 
     if @meeting.save
-        redirect_to "/attendances/#{@meeting.network_id}/#{@meeting.id}/edit_all", :notice => "Meeting updated successfully. Now please revise attendances if necessary."    else
+        redirect_to "/attendances/#{@meeting.network_id}/#{@meeting.id}/edit_all", :notice => "Meeting updated successfully. Now please revise attendances if necessary."
+    else
       render 'edit'
     end
   end

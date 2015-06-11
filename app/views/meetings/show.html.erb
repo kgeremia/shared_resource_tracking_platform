@@ -9,20 +9,30 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-md-12">
-            <dl class="dl-horizontal">
+            <dl class = "dl-horizontal">
               <dt>Network</dt>
               <dd><%= @meeting.network.name %></dd>
 
               <dt>Meeting date</dt>
               <dd><%= @meeting.met_on %></dd>
 
-              <br><br>
+            </dl>
 
+              <table class = "table">
+                <tr>
+                  <th width = "40%">Teacher</th>
+                  <th width = "30%">Attendance</th>
+                  <th width = "30%">Theme Id</th>
+                </tr>
               <% @teachers.each do |teacher| %>
-                <dt><%= teacher.name %></dt>
-                <dd><%= teacher.attendances.find_by( :meeting_id => @meeting ).attendance %></dd>
+                <tr>
+                <td><%= teacher.name %></td>
+                <td><%= teacher.attendances.find_by( :meeting_id => @meeting ).attendance %></td>
+                <td><%= teacher.attendances.find_by( :meeting_id => @meeting ).theme_id %></td>
+                </tr>
               <% end %>
 
+              </table>
 
             </dl>
 

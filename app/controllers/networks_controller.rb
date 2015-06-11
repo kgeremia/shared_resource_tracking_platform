@@ -15,6 +15,7 @@ class NetworksController < ApplicationController
   def new
     @network = Network.new
     @users = User.all
+    @current = current_user.id if current_user
   end
 
   def create

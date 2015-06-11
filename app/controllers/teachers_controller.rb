@@ -7,6 +7,7 @@ class TeachersController < ApplicationController
 
   end
 
+
   def show
     @teacher = Teacher.find(params[:id])
 
@@ -30,13 +31,19 @@ class TeachersController < ApplicationController
 
   def new
     @teacher = Teacher.new
+    @networks = current_user.networks
   end
 
   def create
+    @school = School.new
+    @school.network_id = params[:network_id]
+    @school.name = params[:school_id]
+    @school.save
+
     @teacher = Teacher.new
     @teacher.network_id = params[:network_id]
     @teacher.name = params[:name]
-    @teacher.school_id = params[:school_id]
+    @teacher.school_id = School.find_by({:name => params[:school_id]}).id
     @teacher.address = params[:address]
     @teacher.phone_number = params[:phone_number]
 
@@ -50,10 +57,14 @@ class TeachersController < ApplicationController
   def edit
     @teacher = Teacher.find(params[:id])
     @networks = current_user.networks
+    @schools = current_user.schools
+
+
   end
 
   def update
     @networks = current_user.networks
+    @schools = current_user.schools
 
     @teacher = Teacher.find(params[:id])
 
@@ -63,7 +74,12 @@ class TeachersController < ApplicationController
     @teacher.address = params[:address]
     @teacher.phone_number = params[:phone_number]
 
-    if @teacher.save
+    @test1 = School.find_by({ :id => params[:school_id]}).network_id
+    @test2 = params[:network_id]
+
+    if School.find_by({ :id => params[:school_id]}).network_id.to_s != params[:network_id].to_s
+      redirect_to "/teachers/#{@teacher.id}/edit", :alert => "The school you specified is not in your selected network. Please try again."
+    elsif @teacher.save
       redirect_to "/teachers", :notice => "Teacher updated successfully."
     else
       render 'edit'
