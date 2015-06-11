@@ -9,14 +9,12 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-md-12">
-            <dl class="dl-horizontal">
-              <dt>Name</dt>
-              <dd><%= @theme.name %></dd>
 
-              <dt></dt>
+              <h3><%= @theme.name %></h3>
+
               <dd><img src="<%= @theme.avatar %>" height="100"></dd>
 
-            </dl>
+
 
             <table>
             <caption>Which teachers are currently renting Theme #<%= @theme.id %></caption>
@@ -25,11 +23,12 @@
             <th width="20%">Network</th>
             </tr>
             <% @teachers.each do |teacher| %>
+            <% if teacher.attendances.last != nil  %>
               <tr>
-              <td><%= teacher.name if teacher.attendances.last.theme_id == @theme.id %></td>
-              <td><%= teacher.network.name if teacher.attendances.last.theme_id == @theme.id %></td>
+              <td><%= teacher.name if teacher.attendances.last.theme_id == @theme.id  %></td>
+              <td><%= teacher.network.name if teacher.attendances.last.theme_id == @theme.id  %></td>
               </tr>
-
+            <% end %>
             <% end %>
              </table>
 

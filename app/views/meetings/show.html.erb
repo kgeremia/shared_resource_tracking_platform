@@ -22,11 +22,20 @@
               <% @teachers.each do |teacher| %>
                 <tr>
                 <td><%= teacher.name %></td>
+                <% if teacher.attendances.find_by( :meeting_id => @meeting ) != nil %>
                 <td><%= teacher.attendances.find_by( :meeting_id => @meeting ).attendance %></td>
-                <td><%= teacher.attendances.find_by( :meeting_id => @meeting ).theme_id %></td>
-                </tr>
-              <% end %>
+                <% else %>
+                <td>NA</td>
+                <% end %>
 
+                <% if teacher.attendances.find_by( :meeting_id => @meeting ) != nil %>
+                <td><%= teacher.attendances.find_by( :meeting_id => @meeting ).theme_id %></td>
+                <% else %>
+                <td>NA</td>
+
+                </tr>
+                <% end %>
+              <% end %>
               </table>
 
             </dl>

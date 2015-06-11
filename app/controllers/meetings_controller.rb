@@ -36,22 +36,28 @@ class MeetingsController < ApplicationController
       if @meeting.save
 
         @teachers.each do |teacher|
-          a=Attendance.new
-          a.meeting_id = @meeting.id
-          a.teacher_id = teacher.id
-          a.attendance = "Present"
-          a.note = ""
 
-            first_theme = teacher.attendances.first.theme_id.to_i
-            total_ats = teacher.attendances.count.to_i
-            rotate = total_ats%first_theme
-            newtheme = first_theme + rotate
+            a=Attendance.new
+            a.meeting_id = @meeting.id
+            a.teacher_id = teacher.id
+            a.attendance = "Present"
+            a.note = ""
 
-            if newtheme > 12
-              a.theme_id = newtheme-12
+            if teacher.attendances.count > 0
+              first_theme = teacher.attendances.first.theme_id.to_i
             else
-              a.theme_id = newtheme
+              first_theme = rand(Theme.count).to_i
             end
+
+              total_ats = teacher.attendances.count.to_i
+              rotate = total_ats%first_theme
+              newtheme = first_theme + rotate
+
+              if newtheme > 12
+                a.theme_id = newtheme-12
+              else
+                a.theme_id = newtheme
+              end
 
           a.save
         end

@@ -132,7 +132,7 @@ User.all.each do |user|
       teacher.avatar = Faker::Avatar.image
       teacher.school_id = school.id
       teacher.network_id = network.id
-      puts "1) Teacher " + teacher.name.to_s + " has network_id " + teacher.network_id.to_s
+
       teacher.save
 
     end
