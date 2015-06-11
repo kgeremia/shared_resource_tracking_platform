@@ -49,9 +49,12 @@ class TeachersController < ApplicationController
 
   def edit
     @teacher = Teacher.find(params[:id])
+    @networks = current_user.networks
   end
 
   def update
+    @networks = current_user.networks
+
     @teacher = Teacher.find(params[:id])
 
     @teacher.network_id = params[:network_id]

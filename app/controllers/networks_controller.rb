@@ -14,6 +14,7 @@ class NetworksController < ApplicationController
 
   def new
     @network = Network.new
+    @users = User.all
   end
 
   def create
@@ -30,9 +31,11 @@ class NetworksController < ApplicationController
 
   def edit
     @network = Network.find(params[:id])
+    @users = User.all
   end
 
   def update
+    @users = User.all
     @network = Network.find(params[:id])
 
     @network.user_id = params[:user_id]

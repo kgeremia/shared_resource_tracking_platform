@@ -28,9 +28,10 @@
               User
             </label>
             <div class="col-sm-10">
-              <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @network.user_id %>">
+              <%= select_tag :user_id, options_from_collection_for_select(@users, :id, :name, @users.name), :class => "form-control" %>
             </div>
           </div>
+
 
           <!-- Label and input for name -->
           <div class="form-group">

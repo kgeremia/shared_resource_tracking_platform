@@ -25,7 +25,7 @@
       <div class="panel-body">
         <dl>
           <dt>Network</dt>
-          <dd><%= resource.network_id %></dd>
+          <dd><%= resource.network.name %></dd>
 
           <dt>Name</dt>
           <dd><%= resource.name %></dd>
@@ -34,7 +34,10 @@
           <dd><%= resource.status %></dd>
 
           <dt>Theme</dt>
-          <dd><%= resource.theme_id %></dd>
+          <dd><%= resource.theme.name %></dd>
+
+          <dt>Current teacher</dt>
+          <dd><%= resource.network.attendances.where({ :theme_id => resource.theme_id}).last.teacher_id %></dd>
 
         </dl>
         <div class="btn-group btn-group-justified">

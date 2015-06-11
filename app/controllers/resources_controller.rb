@@ -1,6 +1,7 @@
 class ResourcesController < ApplicationController
   def index
     @resources = current_user.resources
+
   end
 
   def show

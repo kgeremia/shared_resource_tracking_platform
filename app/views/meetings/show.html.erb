@@ -11,12 +11,22 @@
           <div class="col-md-12">
             <dl class="dl-horizontal">
               <dt>Network</dt>
-              <dd><%= @meeting.network_id %></dd>
+              <dd><%= @meeting.network.name %></dd>
 
-              <dt>Met on</dt>
+              <dt>Meeting date</dt>
               <dd><%= @meeting.met_on %></dd>
 
+              <br><br>
+
+              <% @teachers.each do |teacher| %>
+                <dt><%= teacher.name %></dt>
+                <dd><%= teacher.attendances.find_by( :meeting_id => @meeting ).attendance %></dd>
+              <% end %>
+
+
             </dl>
+
+
             <div class="btn-group btn-group-justified">
               <a href="/meetings" class="btn btn-primary">
                 <i class="fa fa-chevron-left"></i>

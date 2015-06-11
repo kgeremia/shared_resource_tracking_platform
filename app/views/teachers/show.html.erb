@@ -10,11 +10,11 @@
         <div class="row">
           <div class="col-md-12">
             <dl class="dl-horizontal">
+              <dt></dt>
+              <dd><img src="<%= @teacher.avatar %>"></dd>
+
               <dt>Network</dt>
               <dd><%= @teacher.network.name %></dd>
-
-              <dt>Picture</dt>
-              <dd><img src="<%= @teacher.avatar %>"></dd>
 
               <dt>Name</dt>
               <dd><%= @teacher.name %></dd>
@@ -30,6 +30,10 @@
 
               <dt>Attendance History</dt>
               <dd><%= @attendance %>%</dd>
+
+              <dt>Current Theme</dt>
+              <dd><%= Theme.find_by({ :id => @teacher.attendances.last.theme_id}).name %></dd>
+              <dd><%= Theme.find_by({ :id => @teacher.attendances.last.theme_id}).avatar %></dd>
 
             </dl>
             <div class="btn-group btn-group-justified">

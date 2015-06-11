@@ -6,6 +6,8 @@ class MeetingsController < ApplicationController
 
   def show
     @meeting = Meeting.find(params[:id])
+    @network = @meeting.network_id
+    @teachers = Teacher.where({ :network_id => @network})
   end
 
   def new
@@ -60,12 +62,11 @@ class MeetingsController < ApplicationController
   def update
     @meeting = Meeting.find(params[:id])
 
-    @meeting.network_id = params[:network_id]
+    #@meeting.network_id = params[:network_id]
     @meeting.met_on = params[:met_on]
 
     if @meeting.save
-      redirect_to "/meetings", :notice => "Meeting updated successfully."
-    else
+        redirect_to "/attendances/#{@meeting.network_id}/#{@meeting.id}/edit_all", :notice => "Meeting updated successfully. Now please revise attendances if necessary."    else
       render 'edit'
     end
   end
