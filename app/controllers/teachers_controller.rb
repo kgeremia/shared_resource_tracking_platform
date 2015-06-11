@@ -1,10 +1,6 @@
 class TeachersController < ApplicationController
   def index
     @teachers = current_user.teachers
-
-    #@teachers = Teacher.where({ :user_id => current_user.id })
-    #if teacher.network.user.id == current_user.id
-
   end
 
 
@@ -19,13 +15,12 @@ class TeachersController < ApplicationController
             temp = 0
           end
         running_total=running_total + temp
-    end
+      end
 
     count = @teacher.attendances.count.to_f
     present = running_total.to_f
 
     @attendance = (present/count*100).round(0)
-
 
   end
 
@@ -46,6 +41,9 @@ class TeachersController < ApplicationController
     @teacher.school_id = School.find_by({:name => params[:school_id]}).id
     @teacher.address = params[:address]
     @teacher.phone_number = params[:phone_number]
+    @teacher.avatar = params[:avatar]
+
+    puts "teacher saved"
 
     if @teacher.save
       redirect_to "/teachers", :notice => "Teacher created successfully."
@@ -58,8 +56,6 @@ class TeachersController < ApplicationController
     @teacher = Teacher.find(params[:id])
     @networks = current_user.networks
     @schools = current_user.schools
-
-
   end
 
   def update
@@ -84,7 +80,7 @@ class TeachersController < ApplicationController
     else
       render 'edit'
     end
-  end
+end
 
   def destroy
     @teacher = Teacher.find(params[:id])
@@ -93,4 +89,5 @@ class TeachersController < ApplicationController
 
     redirect_to "/teachers", :notice => "Teacher deleted."
   end
+
 end

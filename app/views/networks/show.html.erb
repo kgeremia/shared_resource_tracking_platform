@@ -18,7 +18,7 @@
 
             </dl>
 
-Teachers attendance in the <%= @network.name %> network:
+Teachers in the <%= @network.name %> network:
 
         <div class="row">
           <div class="col-md-12">
@@ -26,9 +26,9 @@ Teachers attendance in the <%= @network.name %> network:
 
 
         <% @network.teachers.each do |teacher| %>
-
-          <dt><%= teacher.name %></dt>
-          <dd>X%</dd>
+        <ul>
+          <li><%= teacher.name %></li>
+          </ul>
 
         <% end %>
       </div>

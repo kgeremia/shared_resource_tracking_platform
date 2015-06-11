@@ -33,7 +33,7 @@
 
               <dt>Current Theme</dt>
               <dd><%= Theme.find_by({ :id => @teacher.attendances.last.theme_id}).name %></dd>
-              <dd><%= Theme.find_by({ :id => @teacher.attendances.last.theme_id}).avatar %></dd>
+              <dd><img src="<%= Theme.find_by({ :id => @teacher.attendances.last.theme_id}).avatar %>"></dd>
 
             </dl>
             <div class="btn-group btn-group-justified">

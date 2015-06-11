@@ -28,8 +28,8 @@ class MeetingsController < ApplicationController
 
     if @meeting.met_on == nil
       redirect_to "/meetings/new", :alert => "Please enter the date of the meeting before continuting."
-    elsif @meeting.met_on
-
+    elsif Teacher.where(:network_id => params[:network_id]).count == 0
+      redirect_to "/teachers/new", :alert => "The #{Network.find_by(:id => params[:network_id]).name} network has no teachers. You must add teachers befor taking attendance."
     else
 
       if @meeting.save
@@ -39,8 +39,18 @@ class MeetingsController < ApplicationController
           a.meeting_id = @meeting.id
           a.teacher_id = teacher.id
           a.attendance = "Present"
-          a.note = "test 2"
-          a.theme_id = ""
+          a.note = ""
+
+            first_theme = teacher.attendances.first.theme_id.to_i
+            total_ats = teacher.attendances.count.to_i
+            rotate = total_ats%first_theme
+            newtheme = first_theme + rotate
+
+            if newtheme > 12
+              a.theme_id = newtheme-12
+            else
+              a.theme_id = newtheme
+            end
 
           a.save
         end
@@ -59,6 +69,7 @@ class MeetingsController < ApplicationController
   def edit
     @meeting = Meeting.find(params[:id])
   end
+
 
   def update
     @meeting = Meeting.find(params[:id])

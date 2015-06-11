@@ -57,18 +57,14 @@
           <td>
             <dl>
               <dt>School</dt>
-              <dd><%= teacher.school %></dd>
+              <dd><%= teacher.school.name %></dd>
             </dl>
           </td><td>
             <dl>
 
 
               <dt>Current Theme</dt>
-              <% if Attendances.where({ :teacher_id => teacher.id}).blank %>
-                <dd><%= Theme.find_by({ :id => teacher.attendances.last.theme_id}).name %></dd>
-              <% else %>
-                <dd>NA</dd>
-              <% end %>
+              <dd><%= Theme.find_by({ :id => teacher.attendances.last.theme_id}).name if teacher.attendances.last != nil %></dd
             </dl>
           </td>
         </tr>
